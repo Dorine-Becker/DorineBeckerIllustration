@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Parisienne&display=swap');
+
+body {
+  font-family: 'Crimson Pro', serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #f9f7f1, #f3ede3);
+  color: #3d2e2e;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #3d5b43; /* vert sapin doux */
+  padding: 1rem 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: #fdf4e3;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Parisienne', cursive;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #eec373; /* jaune doré doux */
+}
+
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  font-family: 'Parisienne', cursive;
+  font-size: 2.5rem;
+  color: #a63d40; /* rouge doux */
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: #3d5b43;
+}
+
+.projets-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.vignette {
+  width: 250px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vignette:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.vignette img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  border: 4px solid #eec373; /* bord jaune doux */
+}
+
+footer {
+  background-color: #a63d40; /* rouge brique */
+  color: #fdf4e3;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  font-family: 'Parisienne', cursive;
+  font-size: 1.2rem;
+}
+
+.bienvenue {
+  font-family: 'Parisienne', cursive;
+  font-size: 1.8rem;
+  color: #a63d40; /* rouge brique doux */
+  text-align: center;
+  background-color: #fdf4e3;
+  padding: 1.5rem 2rem;
+  border: 2px dashed #eec373; /* jaune doré */
+  border-radius: 15px;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease;
+}
+
+.bienvenue:hover {
+  transform: scale(1.02);
+}
+
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 1.2rem;
+  user-select: none;
+  pointer-events: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0.2;
+  }
+}
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 2rem auto;
+  background-color: #fdf4e3;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+form label {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #3d5b43;
+}
+
+form input,
+form textarea {
+  padding: 0.6rem;
+  border: 2px solid #eec373;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Crimson Pro', serif;
+  margin-top: 0.3rem;
+}
+
+form input:invalid {
+  border-color: #a63d40;
+}
+
+form button {
+  margin-top: 2rem;
+  background-color: #3d5b43;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Parisienne', cursive;
+}
+
+form button:hover {
+  background-color: #2e4032;
+}

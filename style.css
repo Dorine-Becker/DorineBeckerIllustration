@@ -1,186 +1,354 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Parisienne&display=swap');
-
-body {
-  font-family: 'Crimson Pro', serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to bottom, #f9f7f1, #f3ede3);
-  color: #3d2e2e;
-  line-height: 1.6;
-}
-
-header {
-  background-color: #3d5b43; /* vert sapin doux */
-  padding: 1rem 0;
+/* Styles généraux */
+nav {
+  position: relative;
+  background-color: white;
+  padding: 1rem 2rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  justify-content: center;
   gap: 2rem;
+  margin: 0;
+  padding: 0;
+  flex-direction: row; /* ligne sur grand écran */
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  color: #3d5b43;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #eec373;
+  outline: none;
+}
+
+/* Bouton hamburger caché sur grand écran */
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #3d5b43;
+  font-family: 'Parisienne', cursive;
+}
+
+/* RESPONSIVE - sur petit écran */
+@media (max-width: 768px) {
+  /* Affiche le bouton hamburger */
+  #menu-toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 20;
+  }
+
+  /* Menu caché par défaut */
+  nav ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    flex-direction: column;
+    gap: 1rem;
+    width: 200px;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: none; /* caché */
+  }
+
+  /* Quand menu actif, on l'affiche */
+  nav ul.active {
+    display: flex;
+  }
+
+  nav a {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}
+
+body.accueil {
+  min-height: 100vh;           /* pour que le corps prenne au moins toute la hauteur de l'écran */
+  background-image: url("images/portfolio_larg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  
+  /* Ajustement pour limiter la hauteur tout en couvrant la largeur */
+  background-size: 100% auto;  /* largeur à 100%, hauteur automatique pour garder proportions */
+  
+  background-color: white;
+  overflow-x: hidden;          /* évite une barre horizontale si débordement */
+}
+
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
-nav a {
-  color: #fdf4e3;
-  text-decoration: none;
-  font-weight: bold;
-  font-family: 'Parisienne', cursive;
-  font-size: 1.4rem;
-  transition: color 0.3s ease;
-}
-
-nav a:hover {
-  color: #eec373; /* jaune doré doux */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* prend toute la hauteur de la fenêtre */
 }
 
 main {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: auto;
+  flex-grow: 1; /* pousse le footer vers le bas */
 }
 
-h1 {
-  font-family: 'Parisienne', cursive;
-  font-size: 2.5rem;
-  color: #a63d40; /* rouge doux */
+footer {
+  background-color: white;
+  padding: 1rem;
   text-align: center;
 }
 
-h2 {
-  font-size: 1.5rem;
-  margin-top: 1rem;
+/* --- Section Contact --- */
+#contact {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 15px;
+}
+
+#contact h1 {
+  text-align: center;
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #a63d40;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Formulaire --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form label {
+  font-weight: bold;
   color: #3d5b43;
+  font-family: Arial, sans-serif;
+}
+
+form input,
+form textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #a63d40;
+  outline: none;
+  background-color: #fff;
+}
+
+/* --- Bouton envoyer --- */
+form button {
+  background-color: #3d5b43;
+  color: white;
+  border: none;
 }
 
 .projets-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Toujours 2 colonnes */
   gap: 2rem;
-  margin-top: 2rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
+@media (max-width: 600px) {
+  .projets-grid {
+    grid-template-columns: 1fr; /* 1 colonne sur petit écran */
+  }
+}
+
+
 .vignette {
-  width: 250px;
-  text-align: center;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .vignette:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: scale(1.02);
 }
 
 .vignette img {
   width: 100%;
   height: auto;
-  border-radius: 15px;
-  border: 4px solid #eec373; /* bord jaune doux */
+  display: block;
+  border-bottom: 1px solid #eee;
 }
+
+.vignette h2 {
+  font-family: "Georgia", serif;
+  color: #3d5b43;
+  margin: 1rem 0;
+  text-align: center;
+}
+
 
 footer {
-  background-color: #a63d40; /* rouge brique */
-  color: #fdf4e3;
+  background-color: white;
   text-align: center;
-  padding: 1rem 0;
-  margin-top: 2rem;
-  font-family: 'Parisienne', cursive;
-  font-size: 1.2rem;
+  padding: 2rem 1rem 1rem;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.bienvenue {
-  font-family: 'Parisienne', cursive;
-  font-size: 1.8rem;
-  color: #a63d40; /* rouge brique doux */
-  text-align: center;
-  background-color: #fdf4e3;
-  padding: 1.5rem 2rem;
-  border: 2px dashed #eec373; /* jaune doré */
-  border-radius: 15px;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: transform 0.3s ease;
-}
-
-.bienvenue:hover {
-  transform: scale(1.02);
-}
-
-.snowflake {
-  position: fixed;
-  top: -10px;
-  color: white;
-  font-size: 1.2rem;
-  user-select: none;
-  pointer-events: none;
-  animation-name: fall;
-  animation-timing-function: linear;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0.2;
-  }
-}
-form {
+.footer-buttons {
   display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  margin: 2rem auto;
-  background-color: #fdf4e3;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-form label {
-  margin-top: 1rem;
-  font-weight: bold;
+.footer-button {
+  background-color: #3d5b43;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.footer-button:hover {
+  background-color: #eec373;
   color: #3d5b43;
 }
 
-form input,
-form textarea {
-  padding: 0.6rem;
-  border: 2px solid #eec373;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: 'Crimson Pro', serif;
-  margin-top: 0.3rem;
+/* Affichage conditionnel du téléphone selon l’appareil */
+.tel-mobile {
+  display: none;
 }
 
-form input:invalid {
-  border-color: #a63d40;
+.tel-desktop {
+  display: inline;
 }
 
-form button {
-  margin-top: 2rem;
+@media (max-width: 768px) {
+  .tel-desktop {
+    display: none;
+  }
+
+  .tel-mobile {
+    display: inline;
+  }
+}
+
+footer p {
+  margin: 0;
+  font-family: Georgia, serif;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+footer {
+  background-color: white;
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-button {
   background-color: #3d5b43;
   color: white;
-  border: none;
-  padding: 0.8rem 1.2rem;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  cursor: pointer;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  font-family: Georgia, serif;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
-  font-family: 'Parisienne', cursive;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-form button:hover {
-  background-color: #2e4032;
+.footer-button i {
+  font-size: 1.2rem;
 }
+
+.footer-button:hover {
+  background-color: #eec373;
+  color: #3d5b43;
+}
+
+/* Affichage conditionnel du téléphone selon appareil */
+.tel-mobile {
+  display: none;
+}
+
+.tel-desktop {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .tel-desktop {
+    display: none;
+  }
+
+  .tel-mobile {
+    display: inline;
+  }
+}
+
+footer p {
+  margin: 0;
+  font-family: Georgia, serif;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.portrait {
+  max-width: 400px; /* ou 100%, si plus petit que 400px */
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* pour centrer */
+}
+
+

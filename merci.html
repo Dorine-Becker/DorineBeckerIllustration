@@ -2,19 +2,59 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Merci</title>
-  <style>
-    body {
-      background-color: #fdf4e3;
-      font-family: 'Crimson Pro', serif;
-      text-align: center;
-      padding: 3rem;
-      color: #3d5b43;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Merci - Dorine Becker Illustratrice</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-bV0p+eOzEypjVSc7A6I2qsO5Hik7pjD8v8K3ddjzv5HXWzlxKVyOqQAZH5+VrJ/nw1W1UI0lH2FgS1OlK2lhxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-  <h1>Merci pour votre message !</h1>
-  <p>Je vous répondrai dans les plus brefs délais ✨</p>
+<header>
+  <nav>
+    <button id="menu-toggle" aria-label="Afficher le menu">☰</button>
+    <ul id="menu">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="Portfolio.html">Portfolio</a></li>
+      <li><a href="a_propos.html">À propos & Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="merci" style="text-align:center; padding:4rem 1rem;">
+    <h1 style="color:#3d5b43; font-family:Georgia,serif;">Merci pour votre message 🌿</h1>
+    <p style="max-width:600px; margin:1.5rem auto; font-size:1.2rem; line-height:1.6; color:#3d5b43;">
+      Votre message a bien été envoyé.  
+      Je vous répondrai dès que possible — merci de votre intérêt pour mon travail.
+    </p>
+
+    <a href="index.html" class="footer-button" style="margin-top:2rem; display:inline-block;">
+      <i class="fas fa-arrow-left"></i> Retour à l'accueil
+    </a>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-buttons">
+    <a href="mailto:gnrsgn@gmail.com" class="footer-button" aria-label="Envoyer un mail">
+      <i class="fas fa-envelope"></i> <span>Mail</span>
+    </a>
+    <a href="tel:0767205436" class="footer-button" aria-label="Appeler">
+      <i class="fas fa-phone"></i>
+      <span class="tel-desktop">07.67.20.54.36</span>
+      <span class="tel-mobile">Appeler</span>
+    </a>
+    <a href="https://www.instagram.com/dnine_art" target="_blank" class="footer-button" aria-label="Voir sur Instagram">
+      <i class="fab fa-instagram"></i> <span>Instagram</span>
+    </a>
+  </div>
+  <p class="footer-copyright">&copy; 2025 Dorine Becker</p>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+  menuToggle.addEventListener('click', () => menu.classList.toggle('active'));
+</script>
 </body>
 </html>

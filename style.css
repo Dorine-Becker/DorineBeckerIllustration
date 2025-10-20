@@ -26,6 +26,12 @@ body {
 main {
   flex-grow: 1;
 }
+h1 {
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--vert-principal);
+}
+
 
 /* =============================
    Menu / Navigation
@@ -331,7 +337,7 @@ form button:hover {
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   padding: 2rem;
-  max-width: 1000px;
+  max-width: 1200px; /* Augmenté pour 4 colonnes */
   margin: 0 auto;
 }
 
@@ -346,22 +352,48 @@ form button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 280px; /* Hauteur fixe pour toutes les vignettes */
 }
+
+/* Style pour les titres des vignettes (noms des images) */
+.vignette h2 {
+  font-size: 0.8rem; /* Taille de police réduite */
+  margin: 0.5rem 0; /* Espacement réduit */
+  text-align: center;
+  color: var(--vert-principal);
+  flex-grow: 1; /* Pour que le titre prenne l'espace restant */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px; /* Ajoute un peu de padding latéral */
+  overflow: hidden; /* Pour éviter que le texte ne dépasse */
+  text-overflow: ellipsis; /* Ajoute des points de suspension si le texte est trop long */
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+}
+
+
 
 .vignette:hover { transform: scale(1.02); }
 
 .vignette img {
   width: 100%;
-  height: auto;
+  height: 200px; /* Hauteur fixe pour les images */
+  object-fit: cover; /* Pour éviter la déformation */
   display: block;
   border-bottom: 1px solid #eee;
 }
+
 
 .vignette h2 {
   color: var(--vert-principal);
   margin: 1rem 0;
   text-align: center;
+  flex-grow: 1; /* Pour que le titre prenne l'espace restant */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 @media (max-width: 600px) { .projets-grid { grid-template-columns: 1fr; } }
 
@@ -471,4 +503,11 @@ body.portfolio footer {
     gap: 1rem;
   }
 }
+
+@media (min-width: 992px) {
+  .projets-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 

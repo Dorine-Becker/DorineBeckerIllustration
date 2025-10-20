@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dorine Becker – Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --vert-principal: #3d5b43;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--vert-principal);
+      margin: 2rem 0;
+      transition: opacity 0.4s ease;
+    }
+
+    /* --- Boutons de navigation --- */
+    .portfolio-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .portfolio-nav a {
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: 2px solid var(--vert-principal);
+      color: var(--vert-principal);
+      font-weight: 600;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+
+    .portfolio-nav a.active {
+      background-color: var(--vert-principal);
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    .portfolio-nav a:hover {
+      background-color: var(--vert-principal);
+      color: white;
+    }
+
+    /* --- Grille d’images --- */
+    .projets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+      transition: opacity 0.4s ease;
+    }
+
+    .vignette {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .vignette img {
+      max-width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .vignette:hover img {
+      transform: scale(1.05);
+    }
+
+    .vignette h2 {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      text-align: center;
+      color: var(--vert-principal);
+    }
+
+    /* --- Lightbox --- */
+    #lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+      padding: 1rem;
+    }
+
+    #lightbox img {
+      max-width: 90%;
+      max-height: 75vh;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    #lightbox p {
+      font-size: 1.1rem;
+      max-width: 80%;
+    }
+
+    #lightbox button {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="portfolio">
+  <header>
+    <nav>
+      <button id="menu-toggle" aria-label="Afficher le menu" aria-expanded="false">☰</button>
+      <ul id="menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="a_propos.html">À propos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="portfolio-nav">
+      <a id="btn-illustrations">Illustrations</a>
+      <a id="btn-livres">Livres</a>
+      <a id="btn-chara">Charadesign</a>
+      <a id="btn-jeux">Jeux de société</a>
+    </div>
+
+    <h1 id="page-title"></h1>
+    <div class="projets-grid" id="illustrations-container"></div>
+  </main>
+
+  <div id="lightbox">
+    <button id="close-lightbox" aria-label="Fermer">&times;</button>
+    <img src="" alt="" id="lightbox-image" />
+    <p id="lightbox-text"></p>
+  </div>
+
+  <script>
+    // --- Menu mobile ---
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    if (menuToggle && menu) {
+      menuToggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', menu.classList.contains('active'));
+      });
+    }
+
+    // --- Données des catégories ---
+    const categories = {
+      illustrations: {
+        title: "Illustrations",
+        dir: "images/Illu/",
+        files: ["Biere_saphir.jpg","Biere_golden.jpg","Angouleme_BD_Sherlock_2pages_insta.jpg","Valco_Kem_illu_final.jpg","Biere_red.jpg","JDR_station_essence.jpg"],
+        names: ["Bière Saphir","Bière Golden","Angoulême BD – Sherlock","Valco Kem","Bière Red","JDR – Station essence"],
+        desc: ["Une illustration lumineuse inspirée par la fraîcheur de la bière Saphir.","La Bière Golden, douce et pétillante, mise en valeur par un style doré.",
+              "Extrait d’une bande dessinée inspirée de Sherlock Holmes, publiée pour Angoulême.","Une illustration finale réalisée pour Valco Kem, entre technique et poésie.","Bière Red, une création à la fois vive et chaleureuse.","Une scène narrative illustrant un moment clé d’un jeu de rôle : la station essence."]
+      },
+      livres: {
+        title: "Livres",
+        dir: "images/Livres/",
+        files: ["Euphoria_seb_final.jpg", "Design_Pinocchio.jpg", "Deviant_couv.jpg", "Couv_Edward_et_cie.jpg"],
+        names: ["Euphoria", "Pinocchio", "Deviant", "Edward_et_cie"],
+        desc: ["Description du livre 1", "Description du livre 2", "Description du livre 3", "Description du livre 4"]
+      },
+      chara: {
+        title: "Charadesign",
+        dir: "images/Chara/",
+        files: ["Charadesign_masques_colo.jpg", "Drake_chara.jpg", "Agathe_chara.jpg", "Loup_garou_bruno.jpg"],
+        names: ["masques_colo", "Drake", "Agathe", "Loup_garou"],
+        desc: ["Description du personnage 1", "Description du personnage 2", "Description du personnage 3", "Description du personnage 4"]
+      },
+      jeux: {
+        title: "Jeux de société",
+        dir: "images/Jeux/",
+        files: ["Tresor_fantome_quartier_maitre.jpg", "Charadesign_masques_illu.jpg", "Tresor_fantome_vigie.jpg",
+                          "Tresor_fantome_cuisinier.jpg", "Cherche_et_trouve2.0.jpg", "Tresor_fantome_singe.jpg", "Tresor_fantome_matelot.jpg",
+                          "Compères Baker street/Mockup_boite_sherlock.png", "Compères Baker street/Baker_street_picto.jpg", "Compères Baker street/Les_compères_de_Bakerstreet.jpg",
+                          "Tresor_fantome_canonnier.jpg", "Drako/Drako_illu_final.jpg", "Drako/Mockup_drako.jpg", "Drako/Drako_picto.jpg", "Tresor_fantome_alric.jpg"],
+        names: ["Tresor_fantome_quartier_maitre", "Charadesign_masques_illu", "Tresor_fantome_vigie",
+                          "Tresor_fantome_cuisinier", "Cherche_et_trouve2.0", "Tresor_fantome_singe", "Tresor_fantome_matelot",
+                          "Compères Baker street/Mockup_boite_sherlock", "Compères Baker street/Baker_street_picto", "Compères Baker street/Les_compères_de_Bakerstreet",
+                          "Tresor_fantome_canonnier", "Drako/Drako_illu_final", "Drako/Mockup_drako", "Drako/Drako_picto", "Tresor_fantome_alric"],
+        desc: ["Description du jeu ", "Description du jeu ", "Description du jeu ","Description du jeu ","Description du jeu ","Description du jeu ","Description du jeu ",
+              "Description du jeu ","Description du jeu ","Description du jeu ","Description du jeu ","Description du jeu ","Description du jeu ","Description du jeu ","Description du jeu ",],
+      }
+    };
+
+    const titleEl = document.getElementById('page-title');
+    const container = document.getElementById('illustrations-container');
+
+    function loadCategory(catKey) {
+      const cat = categories[catKey];
+      if (!cat) return;
+
+      // Effet de fondu
+      titleEl.style.opacity = 0;
+      container.style.opacity = 0;
+
+      setTimeout(() => {
+        // Mise à jour du contenu
+        titleEl.textContent = cat.title;
+        container.innerHTML = "";
+
+        document.querySelectorAll(".portfolio-nav a").forEach(a => a.classList.remove("active"));
+        document.getElementById(`btn-${catKey}`).classList.add("active");
+
+        cat.files.forEach((file, i) => {
+          const vignette = document.createElement('a');
+          vignette.className = 'vignette';
+          vignette.href = "#";
+          vignette.innerHTML = `
+            <img src="${cat.dir}${file}" alt="${cat.names[i]}" />
+            <h2>${cat.names[i]}</h2>
+          `;
+          vignette.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('lightbox-image').src = cat.dir + file;
+            document.getElementById('lightbox-text').textContent = cat.desc[i];
+            document.getElementById('lightbox').style.display = 'flex';
+          });
+          container.appendChild(vignette);
+        });
+
+        // Met à jour l'URL sans recharger
+        window.history.pushState({}, "", `?cat=${catKey}`);
+
+        // Réaffiche en douceur
+        titleEl.style.opacity = 1;
+        container.style.opacity = 1;
+      }, 200);
+    }
+
+    // Écoute les clics sur les boutons
+    document.getElementById('btn-illustrations').addEventListener('click', () => loadCategory('illustrations'));
+    document.getElementById('btn-livres').addEventListener('click', () => loadCategory('livres'));
+    document.getElementById('btn-chara').addEventListener('click', () => loadCategory('chara'));
+    document.getElementById('btn-jeux').addEventListener('click', () => loadCategory('jeux'));
+
+    // Charge la catégorie depuis l’URL au démarrage
+    const params = new URLSearchParams(window.location.search);
+    const initialCat = params.get('cat') || 'illustrations';
+    loadCategory(initialCat);
+
+    // Fermeture de la lightbox
+    document.getElementById('close-lightbox').addEventListener('click', () => {
+      document.getElementById('lightbox').style.display = 'none';
+    });
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') e.currentTarget.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
